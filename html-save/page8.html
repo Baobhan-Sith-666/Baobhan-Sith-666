@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>俄罗斯方块</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* 修改为顶部对齐 */
+            height: 100vh;
+            background-color: #282c34;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin-top: 50px; /* 整体向下移动50px */
+        }
+
+        #game-container {
+            display: flex; /* 水平布局 */
+            align-items: flex-start; /* 子元素顶部对齐 */
+            width: 80%; /* 控制整体宽度 */
+            margin-top: 20px; /* 容器再向下移动20px */
+        }
+
+        #game-canvas {
+            border: 2px solid white;
+            background-color: #333;
+        }
+
+        #controls {
+            margin-top: 10px;
+        }
+
+        #controls button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #score {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        #instructions {
+            margin-left: 20px; /* 与游戏区域保持一定距离 */
+            font-size: 16px;
+            text-align: left;
+            width: 200px; /* 控制说明的宽度 */
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="game-area">
+            <canvas id="game-canvas" width="300" height="600"></canvas>
+            <div id="controls">
+                <button id="start-button">开始游戏</button>
+                <button id="pause-button">暂停</button>
+                <button id="restart-button">重新开始</button>
+            </div>
+            <div id="score">分数: 0</div>
+        </div>
+        <div id="instructions">
+            <h3>控制说明：</h3>
+            <p>A：左移</p>
+            <p>D：右移</p>
+            <p>W：逆时针旋转</p>
+            <p>S：顺时针旋转</p>
+        </div>
+    </div>
+    <script>
+        const canvas = document.getElementById("game-canvas");
+        const ctx = canvas.getContext("2d");
+        const grid = 30; // 网格大小
+        const rows = canvas.height / grid;
+        const cols = canvas.width / grid;
+
+        let board = [];
+        let score = 0;
+        let gameInterval;
+        let paused = false;
+
+        // 方块形状
+        const shapes = [
+            [[1, 1, 1, 1]], // I
+            [[1, 1], [1, 1]], // O
+            [[0, 1, 0], [1, 1, 1]], // T
+            [[1, 0, 0], [1, 1, 1]], // L
+            [[0, 0, 1], [1, 1, 1]], // J
+            [[0, 1, 1], [1, 1, 0]], // S
+            [[1, 1, 0], [0, 1, 1]] // Z
+        ];
+
+        // 方块类
+        class Tetromino {
+            constructor(shape) {
+                this.shape = shape;
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            }
+
+            rotate() {
+                const newShape = [];
+                for (let col = 0; col < this.shape[0].length; col++) {
+                    newShape[col] = [];
+                    for (let row = this.shape.length - 1; row >= 0; row--) {
+                        newShape[col].push(this.shape[row][col]);
+                    }
+                }
+                this.shape = newShape;
+            }
+        }
+
+        // 初始化游戏
+        function init() {
+            board = Array.from({ length: rows }, () => Array(cols).fill(0));
+            score = 0;
+            document.getElementById("score").innerText = `分数: ${score}`;
+            spawnTetromino();
+        }
+
+        // 随机生成方块
+        function spawnTetromino() {
+            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+            currentTetromino = new Tetromino(randomShape);
+            currentX = Math.floor(cols / 2) - Math.floor(currentTetromino.shape[0].length / 2);
+            currentY = 0;
+            if (collides(currentTetromino, currentX, currentY)) {
+                alert("游戏结束！");
+                clearInterval(gameInterval);
+                return;
+            }
+            draw();
+        }
+
+        // 检测碰撞
+        function collides(tetromino, x, y) {
+            for (let row = 0; row < tetromino.shape.length; row++) {
+                for (let col = 0; col < tetromino.shape[row].length; col++) {
+                    if (tetromino.shape[row][col]) {
+                        const newX = x + col;
+                        const newY = y + row;
+                        if (newX < 0 || newX >= cols || newY >= rows || board[newY][newX]) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        // 锁定方块到游戏板
+        function lockTetromino() {
+            for (let row = 0; row < currentTetromino.shape.length; row++) {
+                for (let col = 0; col < currentTetromino.shape[row].length; col++) {
+                    if (currentTetromino.shape[row][col]) {
+                        board[currentY + row][currentX + col] = 1;
+                    }
+                }
+            }
+            clearLines();
+            spawnTetromino();
+        }
+
+        // 清除完整行
+        function clearLines() {
+            for (let row = rows - 1; row >= 0; row--) {
+                if (board[row].every(cell => cell)) {
+                    board.splice(row, 1);
+                    board.unshift(Array(cols).fill(0));
+                    score += 10;
+                    document.getElementById("score").innerText = `分数: ${score}`;
+                }
+            }
+        }
+
+        // 绘制游戏板和方块
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 绘制游戏板
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    if (board[row][col]) {
+                        ctx.fillStyle = "#fff";
+                        ctx.fillRect(col * grid, row * grid, grid, grid);
+                    }
+                }
+            }
+
+            // 绘制当前方块
+            for (let row = 0; row < currentTetromino.shape.length; row++) {
+                for (let col = 0; col < currentTetromino.shape[row].length; col++) {
+                    if (currentTetromino.shape[row][col]) {
+                        ctx.fillStyle = currentTetromino.color;
+                        ctx.fillRect((currentX + col) * grid, (currentY + row) * grid, grid, grid);
+                    }
+                }
+            }
+        }
+
+        // 游戏循环
+        function gameLoop() {
+            if (paused) return;
+            currentY++;
+            if (collides(currentTetromino, currentX, currentY)) {
+                currentY--;
+                lockTetromino();
+            }
+            draw();
+        }
+
+        // 事件绑定
+        document.getElementById("start-button").addEventListener("click", () => {
+            init();
+            gameInterval = setInterval(gameLoop, 1000);
+        });
+
+        document.getElementById("pause-button").addEventListener("click", () => {
+            paused = !paused;
+        });
+
+        document.getElementById("restart-button").addEventListener("click", () => {
+            clearInterval(gameInterval);
+            init();
+            gameInterval = setInterval(gameLoop, 1000);
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (paused) return;
+            switch (e.key.toLowerCase()) {
+                case "a": // 左移
+                    if (!collides(currentTetromino, currentX - 1, currentY)) {
+                        currentX--;
+                    }
+                    break;
+                case "d": // 右移
+                    if (!collides(currentTetromino, currentX + 1, currentY)) {
+                        currentX++;
+                    }
+                    break;
+                case "w": // 逆时针旋转
+                    currentTetromino.rotate();
+                    currentTetromino.rotate();
+                    currentTetromino.rotate();
+                    if (collides(currentTetromino, currentX, currentY)) {
+                        currentTetromino.rotate();
+                    }
+                    break;
+                case "s": // 顺时针旋转
+                    currentTetromino.rotate();
+                    if (collides(currentTetromino, currentX, currentY)) {
+                        currentTetromino.rotate();
+                        currentTetromino.rotate();
+                        currentTetromino.rotate();
+                    }
+                    break;
+            }
+            draw();
+        });
+    </script>
+</body>
+</html>

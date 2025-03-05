@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下载链接</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .pagination button, .pagination span {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .pagination button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .pagination span.active {
+            background-color: #007bff;
+            color: white;
+            cursor: default;
+        }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .search-bar select, .search-bar input, .search-bar button {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .search-bar button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- 搜索栏 -->
+    <div class="search-bar">
+        <select id="searchType">
+            <option value="category">分类</option>
+            <option value="name">资源名称</option>
+            <option value="method">下载方式</option>
+        </select>
+        <input type="text" id="searchContent" placeholder="输入搜索内容">
+        <button onclick="search()">搜索</button>
+    </div>
+
+    <!-- 表格 -->
+    <table id="downloadsTable">
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>资源名称</th>
+                <th>下载方式</th>
+                <th>链接</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- 数据将动态插入到这里 -->
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button id="prev" onclick="changePage(-1)">上一页</button>
+        <div id="page-numbers"></div>
+        <button id="next" onclick="changePage(1)">下一页</button>
+    </div>
+
+    <script>
+        // 从JSON文件加载数据
+        async function loadData() {
+            try {
+                const response = await fetch("downloads.json"); // 假设JSON文件名为downloads.json
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error("加载数据失败:", error);
+                return [];
+            }
+        }
+
+        const itemsPerPage = 20; // 每页显示20条数据
+        let currentPage = 1;
+        let allData = []; // 存储所有数据
+        let filteredData = []; // 存储筛选后的数据
+
+        // 显示当前页的数据
+        function showPage(page, data) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageData = data.slice(start, end);
+
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = ''; // 清空当前表格内容
+
+            // 如果数据不足20条，填充空白行
+            for (let i = 0; i < itemsPerPage; i++) {
+                const item = pageData[i] || {};
+                const row = document.createElement('tr');
+
+                // 分类
+                const categoryCell = document.createElement('td');
+                categoryCell.textContent = item.category || "";
+                row.appendChild(categoryCell);
+
+                // 资源名称
+                const nameCell = document.createElement('td');
+                nameCell.textContent = item.name || "";
+                row.appendChild(nameCell);
+
+                // 下载方式
+                const methodCell = document.createElement('td');
+                methodCell.textContent = item.method || "";
+                row.appendChild(methodCell);
+
+                // 链接
+                const linkCell = document.createElement('td');
+                if (item.link) {
+                    const linkElement = document.createElement('a');
+                    linkElement.href = item.link;
+                    linkElement.textContent = item.link;
+                    linkElement.target = "_blank"; // 在新标签页打开
+                    linkCell.appendChild(linkElement);
+                } else {
+                    linkCell.textContent = "";
+                }
+                row.appendChild(linkCell);
+
+                tableBody.appendChild(row);
+            }
+        }
+
+        // 显示页码列表
+        function showPageNumbers() {
+            const pageNumbersDiv = document.getElementById('page-numbers');
+            pageNumbersDiv.innerHTML = ''; // 清空当前页码列表
+
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('span');
+                button.textContent = i;
+                button.className = i === currentPage ? 'active' : '';
+                button.addEventListener('click', () => {
+                    if (i !== currentPage) {
+                        currentPage = i;
+                        showPage(currentPage, filteredData);
+                        updateButtons();
+                        showPageNumbers();
+                    }
+                });
+                pageNumbersDiv.appendChild(button);
+            }
+        }
+
+        // 更新分页按钮状态
+        function updateButtons() {
+            const prevButton = document.getElementById('prev');
+            const nextButton = document.getElementById('next');
+
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            prevButton.disabled = currentPage === 1;
+            nextButton.disabled = currentPage === totalPages;
+        }
+
+        // 切换页码
+        function changePage(step) {
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            if (step === -1 && currentPage > 1) {
+                currentPage--;
+            } else if (step === 1 && currentPage < totalPages) {
+                currentPage++;
+            }
+            showPage(currentPage, filteredData);
+            updateButtons();
+            showPageNumbers();
+        }
+
+        // 搜索功能
+        function search() {
+            const searchType = document.getElementById('searchType').value;
+            const searchContent = document.getElementById('searchContent').value.toLowerCase();
+
+            filteredData = allData.filter(item => {
+                let match = false;
+                if (searchType === 'category') match = item.category.toLowerCase().includes(searchContent);
+                if (searchType === 'name') match = item.name.toLowerCase().includes(searchContent);
+                if (searchType === 'method') match = item.method.toLowerCase().includes(searchContent);
+                return match;
+            });
+
+            // 重新计算总页数
+            currentPage = 1; // 重置到第一页
+            showPage(currentPage, filteredData);
+            showPageNumbers();
+            updateButtons();
+        }
+
+        // 初始化
+        (async () => {
+            allData = await loadData();
+            filteredData = allData; // 初始数据
+            showPage(currentPage, filteredData);
+            updateButtons();
+            showPageNumbers();
+        })();
+    </script>
+</body>
+</html>

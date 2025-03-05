@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顶部控件中的 LaTeX 公式动画</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* 顶部控件样式 */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px; /* 控件高度 */
+            background: linear-gradient(-45deg, #d0f0c0, #ffffff, #a8dadc, #ffffff); /* 绿色系和白色系渐变 */
+            background-size: 400% 400%; /* 调整渐变的尺寸 */
+            animation: gradient 8s ease infinite; /* 渐变动画 */
+            overflow: hidden;
+        }
+
+        /* 动画元素样式 */
+        .element {
+            position: absolute;
+            font-size: 16px; /* 字体大小 */
+            font-weight: bold;
+            color: #333;
+            opacity: 0;
+            animation: fade 6s ease-in-out forwards; /* 延长动画时间 */
+        }
+
+        /* 动画 */
+        @keyframes fade {
+            0%, 100% {
+                opacity: 0;
+            }
+            20%, 80% { /* 增加元素停留时间 */
+                opacity: 1;
+            }
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+    </style>
+    <!-- 引入 MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="top-bar"></div>
+
+    <script>
+        const topBar = document.querySelector(".top-bar");
+        const elements = [
+            // 有机化学公式
+            "\\( \\text{R-COOH} + \\text{R'-OH} \\rightarrow \\text{R-COOR'} + \\text{H}_2\\text{O} \\)",
+            "\\( \\text{R-MgX} + \\text{CO}_2 \\rightarrow \\text{R-COOR'} \\)",
+            "\\( \\text{R-X} + \\text{R'-OH} \\rightarrow \\text{R-O-R'} + \\text{HX} \\)",
+            "\\( \\text{R-CHO} + \\text{R'-CHO} \\rightarrow \\text{R-CH(OH)-CH}_2\\text{OH} \\)",
+            "\\( \\text{CH}_2=\\text{C(COOR)}_2 + \\text{R'-CHO} \\rightarrow \\text{CH}_2=\\text{C(COOR)}\\text{CH}_2\\text{OH} \\)",
+            "\\( \\text{Ar-O-CH}_2\\text{CH}_2\\text{O-CH}_2\\text{CH}_3 \\rightarrow \\text{Ar-CH}_2\\text{CH}_2\\text{O-CH}_2\\text{CH}_3 \\)",
+            "\\( \\text{C}_6\\text{H}_6 + \\text{CH}_2=\\text{CH-CH}_2\\text{CHO} \\rightarrow \\text{C}_6\\text{H}_4\\text{CH}_2\\text{CH}_2\\text{CHO} \\)",
+            "\\( \\text{R-CH}_2\\text{NH}_2 \\rightarrow \\text{R-OH} + \\text{NH}_3 \\)",
+            "\\( \\text{R-CH(OH)-CH}_2\\text{NH}_2 \\rightarrow \\text{R-CO-NH}_2 \\)",
+            "\\( \\text{R-CO-CH}_2\\text{Br} + \\text{Mg} \\rightarrow \\text{R-CO-CH}_2\\text{MgBr} \\)",
+
+            // 无机化学公式
+            "\\( \\text{N}_2 + 3\\text{H}_2 \\rightleftharpoons 2\\text{NH}_3 \\)",
+            "\\( \\text{SO}_2 + \\text{O}_2 \\rightleftharpoons \\text{SO}_3 \\)",
+            "\\( 2\\text{NaCl} + 2\\text{H}_2\\text{O} \\rightarrow 2\\text{NaOH} + \\text{H}_2 + \\text{Cl}_2 \\)",
+            "\\( 4\\text{NH}_3 + 5\\text{O}_2 \\rightarrow 4\\text{NO} + 6\\text{H}_2\\text{O} \\)",
+            "\\( \\text{Cl}_2 + \\text{H}_2\\text{O} \\rightleftharpoons \\text{HCl} + \\text{HClO} \\)",
+            "\\( 2\\text{H}_2\\text{S} + \\text{SO}_2 \\rightarrow 3\\text{S} + 2\\text{H}_2\\text{O} \\)",
+            "\\( 4\\text{Fe} + 3\\text{O}_2 \\rightarrow 2\\text{Fe}_2\\text{O}_3 \\)",
+            "\\( 3\\text{Cu} + 8\\text{HNO}_3 \\rightarrow 3\\text{Cu(NO}_3\\text{)}_2 + 2\\text{NO} + 4\\text{H}_2\\text{O} \\)",
+            "\\( 2\\text{Al} + \\text{Fe}_2\\text{O}_3 \\rightarrow 2\\text{Fe} + \\text{Al}_2\\text{O}_3 \\)",
+            "\\( \\text{Al(OH)}_3 + 3\\text{HCl} \\rightarrow \\text{AlCl}_3 + 3\\text{H}_2\\text{O} \\)",
+
+            // 物理化学公式
+            "\\( PV = nRT \\)",
+            "\\( \\Delta U = Q - W \\)",
+            "\\( \\frac{dP}{dT} = \\frac{\\Delta H}{T\\Delta V} \\)",
+            "\\( \\left(P + \\frac{a}{V^2}\\right)(V - b) = RT \\)",
+            "\\( f(v) = 4\\pi \\left(\\frac{m}{2\\pi kT}\\right)^{3/2} v^2 e^{-\\frac{mv^2}{2kT}} \\)",
+            "\\( \\Delta G = \\Delta H - T\\Delta S \\)",
+            "\\( P = kH \\cdot C \\)",
+            "\\( E = E^\circ - \\frac{RT}{nF}\\ln Q \\)",
+            "\\( k = A e^{-\\frac{E_a}{RT}} \\)",
+            "\\( \\frac{d\\ln K}{dT} = \\frac{\\Delta H^\circ}{RT^2} \\)",
+
+            // 材料科学与工程基础公式
+            "\\( E = \\frac{\\sigma}{\\epsilon} \\)",
+            "\\( \\nu = -\\frac{\\epsilon_{\\perp}}{\\epsilon_{\\parallel}} \\)",
+            "\\( \\sigma = E \\epsilon \\)",
+            "\\( H = \\frac{F}{A} \\)",
+            "\\( K_I = \\sqrt{\\frac{E\\gamma}{\\pi a}} \\)",
+            "\\( \\alpha = \\frac{1}{L} \\frac{dL}{dT} \\)",
+            "\\( k = \\frac{Qd}{A\\Delta T} \\)",
+            "\\( \\sigma = \\frac{1}{\\rho} \\)",
+            "\\( \\chi = \\frac{M}{H} \\)",
+            "\\( \\rho = \\frac{m}{V} \\)",
+
+            // 高分子化学公式
+            "\\( X_n = \\frac{N_0}{N} \\)",
+            "\\( X_n = \\frac{M_n}{M_0} \\)",
+            "\\( R_p = k_p [M][I]^{1/2} \\)",
+            "\\( \\frac{dX_n}{dX_n} = \\frac{X_n}{\\bar{X}_n} e^{-X_n/\\bar{X}_n} \\)",
+            "\\( R_t = 2k_t [M]^{1/2} [I] \\)",
+            "\\( R_c = k_c [M]^{1/2} [I] [T] \\)",
+            "\\( X_n = \\frac{2k_p}{k_t} \\left(\\frac{[M]}{[I]}\\right)^{1/2} \\)",
+            "\\( X_n = \\frac{2k_p}{k_t + k_c [T]} \\left(\\frac{[M]}{[I]}\\right)^{1/2} \\)",
+            "\\( X_n = \\frac{2k_p}{k_t} \\left(\\frac{[M]}{[I]}\\right)^{1/2} \\)",
+            "\\( X_n = \\frac{2k_p}{k_t} \\left(\\frac{[M]}{[I]}\\right)^{1/2} \\)",
+
+            // 大学物理公式
+            "\\( F = ma \\)",
+            "\\( m_1v_1 + m_2v_2 = m_1v_1' + m_2v_2' \\)",
+            "\\( E = K + U \\)",
+            "\\( s = ut + \\frac{1}{2}at^2 \\)",
+            "\\( x = A \\cos(\\omega t + \\phi) \\)",
+            "\\( y = A \\sin(kx - \\omega t) \\)",
+            "\\( F = G \\frac{m_1 m_2}{r^2} \\)",
+            "\\( K = K_{cm} + K_{rel} \\)",
+            "\\( L = I\\omega \\)",
+            "\\( E = \\frac{1}{2}mv^2 + U(x) \\)",
+
+            // 量子物理公式
+            "\\( i\\hbar \\frac{\\partial \\psi}{\\partial t} = \\hat{H}\\psi \\)",
+            "\\( \\Delta x \\Delta p \\geq \\frac{\\hbar}{2} \\)",
+            "\\( \\lambda = \\frac{h}{p} \\)",
+            "\\( E_n = -\\frac{13.6}{n^2} \\text{eV} \\)",
+            "\\( \\Delta E = E_f - E_i = h\\nu \\)",
+            "\\( [\\hat{x}, \\hat{p}] = i\\hbar \\)",
+            "\\( S = \\frac{\\hbar}{2} \\)",
+            "\\( \\psi = c_1 \\psi_1 + c_2 \\psi_2 \\)",
+            "\\( T = e^{-2\\gamma} \\)",
+            "\\( |\\psi\\rangle = \\frac{1}{\\sqrt{2}} (|00\\rangle + |11\\rangle) \\)",
+
+            // 高等数学公式
+            "\\( f(x) = f(a) + f'(a)(x-a) + \\frac{f''(a)}{2!}(x-a)^2 + \\cdots \\)",
+            "\\( \\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)} \\)",
+            "\\( \\int x^n dx = \\frac{x^{n+1}}{n+1} + C \\)",
+            "\\( \\frac{\\partial f}{\\partial x} = \\lim_{h \\to 0} \\frac{f(x+h, y) - f(x, y)}{h} \\)",
+            "\\( \\iiint_V \\nabla \\cdot \\mathbf{F} \\, dV = \\oiint_S \\mathbf{F} \\cdot d\\mathbf{S} \\)",
+            "\\( \\oint_C (P dx + Q dy) = \\iint_D \\left(\\frac{\\partial Q}{\\partial x} - \\frac{\\partial P}{\\partial y}\\right) dA \\)",
+            "\\( \\oint_C \\mathbf{F} \\cdot d\\mathbf{r} = \\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S} \\)",
+            "\\( \\nabla f = \\lambda \\nabla g \\)",
+            "\\( \\hat{f}(k) = \\int_{-\\infty}^{\\infty} f(x) e^{-2\\pi ikx} dx \\)",
+            "\\( \\mathcal{L}\\{f(t)\\} = \\int_0^{\\infty} f(t) e^{-st} dt \\)",
+
+            // 电动力学公式
+            "\\( \\nabla \\cdot \\mathbf{E} = \\frac{\\rho}{\\epsilon_0} \\)",
+            "\\( \\nabla \\times \\mathbf{E} = -\\frac{\\partial \\mathbf{B}}{\\partial t} \\)",
+            "\\( \\nabla \\cdot \\mathbf{B} = 0 \\)",
+            "\\( \\nabla \\times \\mathbf{B} = \\mu_0 \\mathbf{J} + \\mu_0 \\epsilon_0 \\frac{\\partial \\mathbf{E}}{\\partial t} \\)",
+            "\\( \\mathbf{F} = \\frac{1}{4\\pi \\epsilon_0} \\frac{q_1 q_2}{r^2} \\hat{r} \\)",
+            "\\( d\\mathbf{B} = \\frac{\\mu_0}{4\\pi} \\frac{I d\\mathbf{l} \\times \\mathbf{r}}{r^3} \\)",
+            "\\( \\mathbf{F} = q(\\mathbf{E} + \\mathbf{v} \\times \\mathbf{B}) \\)",
+            "\\( \\nabla^2 \\mathbf{E} = \\mu_0 \\epsilon_0 \\frac{\\partial^2 \\mathbf{E}}{\\partial t^2} \\)",
+            "\\( c = \\frac{1}{\\sqrt{\\mu_0 \\epsilon_0}} \\)",
+            "\\( u = \\frac{1}{2} \\epsilon_0 \\mathbf{E}^2 + \\frac{1}{2\\mu_0} \\mathbf{B}^2 \\)",
+
+            // 群论公式
+            "\\( G = \\{g_1, g_2, \\ldots, g_n\\} \\)",
+            "\\( g_i g_j = g_k \\)",
+            "\\( e \\cdot g = g \\cdot e = g \\)",
+            "\\( g \\cdot g^{-1} = g^{-1} \\cdot g = e \\)",
+            "\\( H \\subseteq G \\)",
+            "\\( \\phi: G \\rightarrow H \\)",
+            "\\( \\phi(g_1 g_2) = \\phi(g_1) \\phi(g_2) \\)",
+            "\\( G \\times H = \\{(g, h) | g \\in G, h \\in H\\} \\)",
+            "\\( G/N = \\{gN | g \\in G\\} \\)",
+            "\\( D(g) \\)",
+
+            // 广义相对论公式
+            "\\( G_{\\mu\\nu} = \\frac{8\\pi G}{c^4} T_{\\mu\\nu} \\)",
+            "\\( R_{\\mu\\nu} = \\partial_\\alpha \\Gamma^\\alpha_{\\mu\\nu} - \\partial_\\nu \\Gamma^\\alpha_{\\mu\\alpha} + \\Gamma^\\alpha_{\\mu\\beta} \\Gamma^\\beta_{\\nu\\alpha} - \\Gamma^\\alpha_{\\mu\\nu} \\Gamma^\\beta_{\\alpha\\beta} \\)",
+            "\\( g_{\\mu\\nu} \\)",
+            "\\( \\Gamma^\\alpha_{\\mu\\nu} = \\frac{1}{2} g^{\\alpha\\beta} (\\partial_\\mu g_{\\nu\\beta} + \\partial_\\nu g_{\\mu\\beta} - \\partial_\\beta g_{\\mu\\nu}) \\)",
+            "\\( \\frac{d^2 x^\\mu}{d\\tau^2} + \\Gamma^\\mu_{\\alpha\\beta} \\frac{dx^\\alpha}{d\\tau} \\frac{dx^\\beta}{d\\tau} = 0 \\)",
+            "\\( \\frac{\\Delta \\nu}{\\nu} = -\\frac{\\Delta \\phi}{c^2} \\)",
+            "\\( ds^2 = g_{\\mu\\nu} dx^\\mu dx^\\nu \\)",
+            "\\( ds^2 = -\\left(1 - \\frac{2GM}{c^2 r}\\right) dt^2 + \\left(1 - \\frac{2GM}{c^2 r}\\right)^{-1} dr^2 + r^2 (d\\theta^2 + \\sin^2 \\theta d\\phi^2) \\)",
+            "\\( \\theta = \\frac{4GM}{c^2 b} \\)",
+            "\\( G_{\\mu\\nu} + \\Lambda g_{\\mu\\nu} = \\frac{8\\pi G}{c^4} T_{\\mu\\nu} \\)",
+
+            // 弦论公式
+            "\\( \\psi(\\sigma, \\tau) = \\psi_0 + \\sum_{n=1}^{\\infty} \\left(a_n e^{-in(\\tau + \\sigma)} + a_n^\\dagger e^{-in(\\tau - \\sigma)}\\right) \\)",
+            "\\( T = \\frac{1}{2\\pi \\alpha'} \\)",
+            "\\( [a_m, a_n^\\dagger] = m \\delta_{m+n,0} \\)",
+            "\\( E_0 = \\frac{D-2}{24} \\)",
+            "\\( \\mathcal{A} = \\langle \\text{out} | \\text{in} \\rangle \\)",
+            "\\( T_{\\mu\\nu} = 0 \\)",
+            "\\( \\{Q_\\alpha, Q_\\beta\\} = 2\\gamma^\\mu_{\\alpha\\beta} P_\\mu \\)",
+            "\\( x^i = x^i + 2\\pi R \\)",
+            "\\( T \\leftrightarrow \\frac{1}{T} \\)",
+            "\\( \\partial_\\tau X^\\mu = 0 \\)",
+
+            // 拓扑学公式
+            "\\( (X, \\tau) \\)",
+            "\\( U \\in \\tau \\)",
+            "\\( X \\setminus U \\)",
+            "\\( f: X \\rightarrow Y \\)",
+            "\\( f: X \\rightarrow Y \\)",
+            "\\( X = A \\cup B \\)",
+            "\\( X = \\bigcup_{i=1}^n U_i \\)",
+            "\\( f_t: X \\rightarrow Y \\)",
+            "\\( H_n(X) \\)",
+            "\\( \\pi_n(X) \\)"
+        ];
+        const maxElements = 10; // 同时显示的最大元素数量
+        const elementInterval = 1000; // 每1000ms生成一个新元素
+        const elementPadding = 30; // 元素之间的最小间距
+        const elementSize = 50; // 假设元素的宽度和高度为50px
+
+        function createElement() {
+            const currentElements = topBar.querySelectorAll(".element");
+            if (currentElements.length >= maxElements) return;
+
+            const topBarRect = topBar.getBoundingClientRect();
+            let randomX, randomY;
+
+            // 确保新元素不会与现有元素重叠
+            do {
+                randomX = Math.random() * (topBarRect.width - elementSize - elementPadding * 2) + elementPadding;
+                randomY = Math.random() * (topBarRect.height - elementSize - elementPadding * 2) + elementPadding;
+            } while (isOverlapping(randomX, randomY, currentElements));
+
+            const element = document.createElement("div");
+            element.classList.add("element");
+            element.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+            element.style.left = `${randomX}px`;
+            element.style.top = `${randomY}px`;
+
+            element.addEventListener("animationend", () => {
+                element.remove();
+            });
+
+            topBar.appendChild(element);
+
+            // 确保 MathJax 渲染新插入的公式
+            MathJax.typesetPromise([element]).catch(err => console.log(err));
+        }
+
+        function isOverlapping(x, y, currentElements) {
+            const rect = {
+                x: x,
+                y: y,
+                width: elementSize,
+                height: elementSize
+            };
+
+            for (let el of currentElements) {
+                const elRect = el.getBoundingClientRect();
+                if (
+                    rect.x + rect.width + elementPadding > elRect.left &&
+                    rect.x - elementPadding < elRect.right &&
+                    rect.y + rect.height + elementPadding > elRect.top &&
+                    rect.y - elementPadding < elRect.bottom
+                ) {
+                    return true; // 发生重叠
+                }
+            }
+            return false; // 不重叠
+        }
+
+        setInterval(createElement, elementInterval); // 每1000ms生成一个新元素
+    </script>
+</body>
+</html>

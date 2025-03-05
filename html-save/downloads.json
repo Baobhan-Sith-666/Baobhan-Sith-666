@@ -1,0 +1,674 @@
+[
+    {
+        "category": "AI模型",
+        "name": "Stable Diffusion",
+        "method": "百度云盘",
+        "link": "https://pan.baidu.com/s/12345678"
+    },
+    {
+        "category": "安装包",
+        "name": "Python 3.9",
+        "method": "官网下载",
+        "link": "https://www.python.org/downloads/release/python-390/"
+    },
+    {
+        "category": "压缩包",
+        "name": "资源合集",
+        "method": "直链下载",
+        "link": "https://example.com/resources.zip"
+    },
+    {
+        "category": "AI模型",
+        "name": "GPT-3",
+        "method": "GitHub",
+        "link": "https://github.com/openai/gpt-3"
+    },
+    {
+        "category": "安装包",
+        "name": "Node.js",
+        "method": "官网下载",
+        "link": "https://nodejs.org/en/download/"
+    },
+    {
+        "category": "AI模型",
+        "name": "AutismMix SDXL",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/288584/autismmix-sdxl"
+    },
+    {
+        "category": "AI模型",
+        "name": "Pony Realism",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/372465/pony-realism"
+    },
+    {
+        "category": "AI模型",
+        "name": "Not Artists Styles for Pony Diffusion V6 XL",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/264290/not-artists-styles-for-pony-diffusion-v6-xl"
+    },
+    {
+        "category": "AI模型",
+        "name": "Prefect Pony XL",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/439889/prefect-pony-xl"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] ClayMaterial-以兽人为主的粘土手办风格 ",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/95658"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] 言叶之庭/The Garden of Words",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/94458"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] 彼岸/ghostdom",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/95050"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] 仙侠道/xianxia",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/96244"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] 少数民族元素/Chinese ethnic minority clothing elements",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/95283"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] Game icon Institute_mode V1.0",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/47800?modelVersionId=52395"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] ∞ | infinity Droste effect recursion",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/96272"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][txt] C站/社区常用高质量提示词",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/62473"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 百花缭乱/midjourney 二次元",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/98401"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Ancient Chinese indoors | 中国古代房屋内部",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/98323"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Origami Art",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/98244"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] I refuse (だが断る。)",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/97875"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 糖画",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/97756"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] beijing opera",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/98778"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Chaosmix",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/98602"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 山海异兽（努力更新中）",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/25818"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] 国风3 GuoFeng3 ",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/10415"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] Realistic Vision V6.0 B1",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/4201"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] AWPainting",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/84476"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Fault art_v1",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/101010"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 松尾裕美/Matsuo Hiromi",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/100853"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] tsuruta ichiro鹤田一郎",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/55379"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][SDXL][lora] zuowangdao",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/100157"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 锐利的眼神",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/100676"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 灵魂大叫",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/100668"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Rorschach Test",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/100603"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Tanzmasken - relics of Weimar dance culture",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/100822"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Rocycloud / 雲海 ",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/90025"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Liliaceae/夜鈴蘭",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/83186"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 露华浓/ancient Chinese style",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/99017"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] xiapei 凤冠霞帔",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/93908"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 3A_Magic_Wizard Engine_Concept_Style_Reference_V1.0",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/98913"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] WSF(Wallpaper Style Filter)",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/101402"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[GoodArticles] The Art of Composition in AI-Assisted Painting",
+        "method": "Civitai",
+        "link": "https://civitai.com/articles/828"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[GoodArticles] My AI-Assisted Painting Workflow: A Personal Journey",
+        "method": "Civitai",
+        "link": "https://civitai.com/articles/125"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] old fish-oldschool-传统模型",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/103380?modelVersionId=122891"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] MeinaUnreal",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/18798"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] BrainDance",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/102753"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[artist] StableDiffusionVN",
+        "method": "Civitai",
+        "link": "https://civitai.com/user/StableDiffusionVN/models"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] AniMesh",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/90642"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Neg4All！",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/102356"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] JHart film",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/104631"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Animation landscape/动漫风景",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/103811"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Zanhua 簪花",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/104185"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][SDXL][lora] CLAMP《聖伝—RG VEDA—》",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/103319 "
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][SDXL][lora] CLAMP《X战记》",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/104466"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 魑魅魍魉/evil spirits lora",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/103529"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] John Martin Style",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/102786"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] https://civitai.com/models/103471",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/103471"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] fangs vampire teeth | 尖牙",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/103163"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Pearly gates/ 扉 Concept",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/103173"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] mocha style 美景模型",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/102128"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] OnlyAnime |《唯》· 炫彩动漫",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/105955/onlyanime"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] BixMix StylizedVision",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107403"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] 月光mix",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107061"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 游丝描 SilkSketch",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107770"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] TWing shadow光影摄影",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/105935"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] Yuemix",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/105204"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Olivian Opulence / Oil Paint LoRA",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/109158"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Stellar Inkscapes / Sketch Style LoRA",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/109590 "
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] YuumeiArt",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/109399"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Winter Hanfu - Clothing LoRA",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/108815"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora]  Jellyfish forest / 水月森",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/106312"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Moonriver / 月川",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107860"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Flower Kettle / 壺中天",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/109039"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] water",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107134"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Oil painting stick",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107165"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] redblack",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/108225 "
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Tropical Home Design",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107058"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] https://civitai.com/models/107102",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107102"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 富婆style/童话般的服设",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107633"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] GAME DEV TOOLS 03 / TOPO",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/105670"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] watercolor | 水彩",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/105784"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][SDXL][SDXL2.0][Flux1.0][lora] Sci-fi Environments",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/105945"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 苏州园林Gardens Style",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/105151"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] LEOSAM's FilmGirl Ultra 胶片风",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/33208"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 华灯初上/Night scene",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/109593"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 流光溢彩/Colorful portraits",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/109586"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] DreamShaper",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/4384"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5] AniVerse",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/107842"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 青禅_ZEN",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/117926"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] People Count Slider - LoRA",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/114104"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] CGpaintingtree asw",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/116032"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Gem shadows / 放浪者の歌",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/116730"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] White star / 星極",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/116088"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Cumbersome / 繁雑度",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/115458"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] niji - C_Freehand_Brushwork",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/116545"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] niji - glass_crack_effects",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/115344"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] Rage Unleashed",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/115100"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SD 1.5][lora] 冰糖葫芦(candied haws)",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/114058"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] chinese style illustration -- 国风插画",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/120206"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] Oil painting(oil brush stroke) - 油画笔触",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/118223"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][Flux1.0][lora] MicroHouse-SDXL/FLUX-PAseer",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/118910"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] PAseer-SDXL-Ink Stains The World-墨染尘",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/118217"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] The Umbrella Lora SDXL",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/118903"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] Pixel art SDXL RW",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/114334"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] Niji3Dstyle_SDXL",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/118567"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] Makoto Shinkai Style",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/120855"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] GHIBLI style V1",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/120860"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] SDXL 木雕风格",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/122446"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] Papercut SDXL",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/122567"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] papercut SDXL 衍纸术",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/121009"
+    },
+    {
+        "category": "AI模型-砚青节点",
+        "name": "[SDXL][lora] Tang Bohu's Painting Style LORA SDXL",
+        "method": "Civitai",
+        "link": "https://civitai.com/models/122748"
+    }
+]

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Style Tabs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e1e4e8;
+            margin-bottom: 10px;
+        }
+        .tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #586069;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .tab.active {
+            color: #24292e;
+            border-bottom: 2px solid #0366d6;
+        }
+        .markdown-body {
+            display: none;
+            padding: 10px;
+        }
+        .markdown-body.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 主Tab -->
+        <div class="tabs">
+            <div class="tab active" data-tab="tab1">项目1</div>
+        </div>
+
+        <!-- 子Tab -->
+        <div class="tabs" id="sub-tabs">
+            <div class="tab" data-tab="githubREADME">声明</div>
+            <div class="tab" data-tab="githubCODE">部分代码</div>
+            <div class="tab" data-tab="githubLINK">链接</div>
+        </div>
+
+        <!-- 页面内容 -->
+        <div class="markdown-body" id="githubREADME-content"></div>
+        <div class="markdown-body" id="githubCODE-content"></div>
+        <div class="markdown-body" id="githubLINK-content"></div>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.markdown-body');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                const targetContent = document.getElementById(tab.dataset.tab + '-content');
+                targetContent.classList.add('active');
+
+                // 构建Markdown文件路径
+                const filePath = `Main_MD/workAndGameStart/${tab.dataset.tab}.md`;
+                console.log(`Loading file: ${filePath}`); // 调试信息
+
+                fetch(`Main_MD/workAndGameStart/${tab.dataset.tab}.md`) // 确保路径正确
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Failed to load file: ${response.statusText}`);
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        targetContent.innerHTML = marked.parse(data); // 使用 marked.parse()
+                    })
+                    .catch(error => {
+                        console.error(error); // 打印错误信息
+                        targetContent.innerHTML = `<p>Error loading content: ${error}</p>`;
+                    });
+            });
+        });
+
+        // 默认加载第一个子Tab的内容
+        document.querySelector('#sub-tabs .tab').click();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</body>
+</html>

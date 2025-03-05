@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun and Moon Toggle Animation</title>
+    <style>
+        /* 定义全局变量 */
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.5s, color 0.5s;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        .toggle-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            cursor: pointer; /* 添加鼠标指针样式 */
+        }
+
+        .sun, .moon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            transition: opacity 0.5s;
+            background-size: cover; /* 确保图片覆盖整个元素 */
+        }
+
+        .sun {
+            background-image: url('SaveImage/sun.png'); /* 使用太阳图片 */
+            opacity: 1;
+        }
+
+        .moon {
+            background-image: url('SaveImage/moon.png'); /* 使用月亮图片 */
+            opacity: 0;
+        }
+
+        /* 添加一个覆盖整个容器的透明层，用于触发点击事件 */
+        .toggle-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="toggle-container">
+        <div class="sun"></div>
+        <div class="moon"></div>
+    </div>
+
+    <script>
+        const sun = document.querySelector('.sun');
+        const moon = document.querySelector('.moon');
+        const container = document.querySelector('.toggle-container');
+
+        container.addEventListener('click', () => {
+            if (sun.style.opacity === '0') {
+                // 当前是月亮模式，切换到太阳模式
+                sun.style.opacity = '1';
+                moon.style.opacity = '0';
+                document.documentElement.style.setProperty('--background-color', '#ffffff');
+                document.documentElement.style.setProperty('--text-color', '#000000');
+            } else {
+                // 当前是太阳模式，切换到月亮模式
+                sun.style.opacity = '0';
+                moon.style.opacity = '1';
+                document.documentElement.style.setProperty('--background-color', '#000000');
+                document.documentElement.style.setProperty('--text-color', '#ffffff');
+            }
+        });
+    </script>
+</body>
+</html>

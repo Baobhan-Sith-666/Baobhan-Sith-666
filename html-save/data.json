@@ -1,0 +1,146 @@
+[
+    {
+        "category": "视频",
+        "name": "Python教程",
+        "locations": ["B站", "CSDN"],
+        "links": ["https://bilibili.com/video1", "https://csdn.net/video1"]
+    },
+    {
+        "category": "文档",
+        "name": "JavaScript手册",
+        "locations": ["GitHub"],
+        "links": ["https://github.com/js-handbook"]
+    },
+    {
+        "category": "视频",
+        "name": "算法导论",
+        "locations": ["B站"],
+        "links": ["https://bilibili.com/algo"]
+    },
+    {
+        "category": "教程",
+        "name": "HTML入门",
+        "locations": ["CSDN", "知乎"],
+        "links": ["https://csdn.net/html", "https://zhihu.com/html"]
+    },
+    {
+        "category": "视屏",
+        "name": "GDScript编程教程（码客二十二）",
+        "locations": ["B站"],
+        "links": ["https://www.bilibili.com/video/BV1FuCrYcEW9/?spm_id_from=333.788.videopod.sections&vd_source=000511d1d64ebec9639a5c95b92a3b52"]
+    },
+    {
+        "category": "视频",
+        "name": "QML教程（落雨薄青衫）",
+        "locations": ["B站"],
+        "links": ["https://www.bilibili.com/video/BV1dS4y1u7vN/?spm_id_from=333.337.search-card.all.click&vd_source=0cbf97fa1eb76377ef75f371013779db"]
+    },
+    {
+        "category": "文档",
+        "name": "Godot资源库",
+        "locations": ["GitHub"],
+        "links": ["https://merxon22.github.io/GodotArchive/zh/posts/beginner_2d/"]
+    },
+    {
+        "category": "综合",
+        "name": "Civitai",
+        "locations": ["Civitai"],
+        "links": ["https://civitai.com/"]
+    },
+    {
+        "category": "综合",
+        "name": "GitHub",
+        "locations": ["GitHub"],
+        "links": ["https://github.com/"]
+    },
+    {
+        "category": "文档",
+        "name": "csdn的markdown编辑器",
+        "locations": ["CSDN"],
+        "links": ["https://editor.csdn.net/md/?articleId="]
+    },
+    {
+        "category": "功能",
+        "name": "图片格式转换工具",
+        "locations": ["其他"],
+        "links": ["https://img.geshi.cn/convert"]
+    },
+    {
+        "category": "题库",
+        "name": "C++题库收集网站",
+        "locations": ["其他"],
+        "links": ["https://www.dotcpp.com/oj/train/"]
+    },
+    {
+        "category": "功能",
+        "name": "chatGPT学习",
+        "locations": ["其他"],
+        "links": ["https://chat.tinycms.xyz:3002/#/chat"]
+    },
+    {
+        "category": "文档",
+        "name": "CSS教程",
+        "locations": ["菜鸟"],
+        "links": ["https://www.runoob.com/css/css-tutorial.html"]
+    },
+    {
+        "category": "文档",
+        "name": "HMTL5教程",
+        "locations": ["菜鸟"],
+        "links": ["https://www.runoob.com/html/html-tutorial.html"]
+    },
+    {
+        "category": "文档",
+        "name": "QT-qml使用教程",
+        "locations": ["其他"],
+        "links": ["https://runebook.dev/cn/docs/qt/qmlfirststeps"]
+    },
+    {
+        "category": "功能",
+        "name": "阿里巴巴图标库",
+        "locations": ["阿里"],
+        "links": ["https://www.iconfont.cn/"]
+    },
+    {
+        "category": "功能",
+        "name": "luatos",
+        "locations": ["wiki"],
+        "links": ["https://wiki.luatos.com/index.html"]
+    },
+    {
+        "category": "文档",
+        "name": "Lua教程",
+        "locations": ["菜鸟"],
+        "links": ["https://www.runoob.com/lua/lua-environment.html"]
+    },
+    {
+        "category": "功能",
+        "name": "在线生成ASCII艺术字",
+        "locations": ["其他"],
+        "links": ["https://www.lddgo.net/string/text-to-ascii-art"]
+    },
+    {
+        "category": "题库",
+        "name": "Python题目",
+        "locations": ["CSDN"],
+        "links": ["https://blog.csdn.net/weixin_40547993/article/details/88928075"]
+    },
+    {
+        "category": "视频",
+        "name": "Gradio系列教程（旧区君）",
+        "locations": ["B站"],
+        "links": ["https://www.bilibili.com/video/BV19m411U7K8/?spm_id_from=333.1391.0.0&vd_source=000511d1d64ebec9639a5c95b92a3b52"]
+    },
+    {
+        "category": "视频",
+        "name": "Python Qt 图形界面-2024版（白月黑羽编程）",
+        "locations": ["B站"],
+        "links": ["https://www.bilibili.com/video/BV1cJ411R7bP?spm_id_from=333.788.videopod.episodes&vd_source=000511d1d64ebec9639a5c95b92a3b52"]
+    },
+    {
+        "category": "",
+        "name": "",
+        "locations": [],
+        "links": []
+    }
+]

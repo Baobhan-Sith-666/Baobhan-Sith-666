@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Animated Birds with Tabs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: sans-serif; /* 默认字体 */
+        }
+
+        .container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 50vh; /* 修改高度为视窗高度的一半 */
+            background-image: linear-gradient(to bottom, rgba(255, 168, 76, 0.6) 0%, rgba(255, 123, 13, 0.6) 100%), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D');
+            background-blend-mode: soft-light;
+            background-size: cover;
+            background-position: center center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-family: 'Zhi Mang Xing', cursive;
+            color: black;
+            font-size: 4rem;
+            letter-spacing: -3px;
+            text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 3;
+        }
+
+        .bird {
+            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells-new.svg');
+            background-size: auto 100%;
+            width: 88px;
+            height: 125px;
+            will-change: background-position;
+            animation-name: fly-cycle;
+            animation-timing-function: steps(10);
+            animation-iteration-count: infinite;
+        }
+
+        .bird--one {
+            animation-duration: 1s;
+            animation-delay: -0.5s;
+        }
+
+        .bird--two {
+            animation-duration: 0.9s;
+            animation-delay: -0.75s;
+        }
+
+        .bird--three {
+            animation-duration: 1.25s;
+            animation-delay: -0.25s;
+        }
+
+        .bird--four {
+            animation-duration: 1.1s;
+            animation-delay: -0.5s;
+        }
+
+        .bird-container {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            transform: scale(0) translateX(-10vw);
+            will-change: transform;
+            animation-name: fly-right-one;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .bird-container--one {
+            animation-duration: 15s;
+            animation-delay: 0;
+        }
+
+        .bird-container--two {
+            animation-duration: 16s;
+            animation-delay: 1s;
+        }
+
+        .bird-container--three {
+            animation-duration: 14.6s;
+            animation-delay: 9.5s;
+        }
+
+        .bird-container--four {
+            animation-duration: 16s;
+            animation-delay: 10.25s;
+        }
+
+        @keyframes fly-cycle {
+            100% {
+                background-position: -900px 0;
+            }
+        }
+
+        @keyframes fly-right-one {
+            0% {
+                transform: scale(0.3) translateX(-10vw);
+            }
+            10% {
+                transform: translateY(2vh) translateX(10vw) scale(0.4);
+            }
+            20% {
+                transform: translateY(0vh) translateX(30vw) scale(0.5);
+            }
+            30% {
+                transform: translateY(4vh) translateX(50vw) scale(0.6);
+            }
+            40% {
+                transform: translateY(2vh) translateX(70vw) scale(0.6);
+            }
+            50% {
+                transform: translateY(0vh) translateX(90vw) scale(0.6);
+            }
+            60% {
+                transform: translateY(0vh) translateX(110vw) scale(0.6);
+            }
+            100% {
+                transform: translateY(0vh) translateX(110vw) scale(0.6);
+            }
+        }
+
+        @keyframes fly-right-two {
+            0% {
+                transform: translateY(-2vh) translateX(-10vw) scale(0.5);
+            }
+            10% {
+                transform: translateY(0vh) translateX(10vw) scale(0.4);
+            }
+            20% {
+                transform: translateY(-4vh) translateX(30vw) scale(0.6);
+            }
+            30% {
+                transform: translateY(1vh) translateX(50vw) scale(0.45);
+            }
+            40% {
+                transform: translateY(-2.5vh) translateX(70vw) scale(0.5);
+            }
+            50% {
+                transform: translateY(0vh) translateX(90vw) scale(0.45);
+            }
+            51% {
+                transform: translateY(0vh) translateX(110vw) scale(0.45);
+            }
+            100% {
+                transform: translateY(0vh) translateX(110vw) scale(0.45);
+            }
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse; /* 合并边框 */
+            margin: 20px 0; /* 与页面上下边距 */
+            font-size: 1rem; /* 字体大小 */
+            border: 1px solid #ddd; /* 表格边框 */
+        }
+
+        thead {
+            background-color: #f2f2f2; /* 表头背景色 */
+        }
+
+        th, td {
+            text-align: left; /* 文本左对齐 */
+            padding: 12px; /* 单元格内边距 */
+            border: 1px solid #ddd; /* 单元格边框 */
+        }
+
+        th {
+            font-weight: bold; /* 加粗表头文本 */
+            color: #333; /* 表头文本颜色 */
+        }
+
+        td:hover { /* 鼠标悬停单元格背景色 */
+            background-color: #f1f1f1;
+        }
+
+        /* Tab模块的样式 */
+        .tabs {
+            display: flex;
+            justify-content: space-around; /* 使Tab按钮均匀分布 */
+            width: 100%;
+            background-color: #fff;
+            border-top: 2px solid #ccc;
+            margin-top: auto;
+            padding: 1rem 0; /* 添加内边距 */
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            border: 2px solid transparent; /* 默认无边框 */
+            border-radius: 5px;
+            margin: 0 0.5rem;
+            transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+            flex: 1; /* 使每个Tab按钮宽度一致 */
+            text-align: center; /* 文本居中 */
+            font-weight: bold; /* 加粗字体 */
+            color: #333; /* 默认文字颜色 */
+        }
+
+        .tab:hover {
+            background-color: #e9e9e9e9; /* 鼠标悬停时的背景颜色 */
+            border-color: #ccc; /* 鼠标悬停时的边框颜色 */
+        }
+
+        .tab.active {
+            background-color: #ff7b0d; /* 激活时的背景颜色 */
+            color: #fff; /* 激活时的文字颜色 */
+            border-color: #ff7b0d; /* 激活时的边框颜色 */
+            transform: scale(1.05); /* 激活时稍微放大 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            width: 100%; /* 确保宽度与浏览器窗口一致 */
+            margin: 1rem auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 内部Tab模块的样式 */
+        .internal-tabs {
+            display: flex;
+            justify-content: space-around; /* 使Tab按钮均匀分布 */
+            width: 100%;
+            background-color: #fff;
+            border-top: 2px solid #ccc;
+            margin-top: 1rem;
+            padding: 0.5rem 0; /* 添加内边距 */
+        }
+
+        .internal-tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            background-color: #f9f9f9f9;
+            border: 2px solid transparent; /* 默认无边框 */
+            border-radius: 5px;
+            margin: 0 0.25rem;
+            transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+            flex: 1; /* 使每个Tab按钮宽度一致 */
+            text-align: center; /* 文本居中 */
+            font-weight: bold; /* 加粗字体 */
+            color: #333; /* 默认文字颜色 */
+        }
+
+        .internal-tab:hover {
+            background-color: #e9e9e9e9; /* 鼠标悬停时的背景颜色 */
+            border-color: #ccc; /* 鼠标停时的边框颜色 */
+        }
+
+        .internal-tab.active {
+            background-color: #add8e6; /* 激活时的背景颜色 */
+            color: #000; /* 激活时的文字颜色 */
+            border-color: #add8e6; /* 激活时的边框颜色 */
+            transform: scale(1); /* 激活时不放大 */
+            box-shadow: none; /* 激活时无阴影效果 */
+        }
+
+        .internal-tab-content {
+            display: none;
+            padding: 2rem;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            width: 100%; /* 确保宽度与浏览器窗口一致 */
+            margin: 1rem auto;
+        }
+
+        .internal-tab-content.active {
+            display: block;
+        }
+
+        /* 搜索栏样式 */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+            align-self: flex-start; /* 将搜索栏放置在内容顶部 */
+        }
+
+        .search-input {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .search-button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #005f9f;
+        }
+    </style>
+</head>
+<body>
+    <!-- 飞鸟动画模块 -->
+    <div class="container">
+        <h1>发布页</h1>
+        <div class="bird-container bird-container--one">
+            <div class="bird bird--one"></div>
+        </div>
+        <div class="bird-container bird-container--two">
+            <div class="bird bird--two"></div>
+        </div>
+        <div class="bird-container bird-container--three">
+            <div class="bird bird--three"></div>
+        </div>
+        <div class="bird-container bird-container--four">
+            <div class="bird bird--four"></div>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <div class="tab active" data-tab="tab1">程序发布页</div>
+        <div class="tab" data-tab="tab2">源代码展示</div>
+        <div class="tab" data-tab="tab3">其他资源合集</div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content active" id="tab1">
+        <h2>程序发布页</h2>
+        <p>This is the content for Tab 1.</p>
+    </div>
+    <div class="tab-content" id="tab2">
+        <h2>源代码展示</h2>
+        <p>This is the content for Tab 2.</p>
+    </div>
+    <div class="tab-content" id="tab3">
+        <div class="internal-tabs">
+            <div class="internal-tab active" data-tab="internal-tab1">学习资源</div>
+            <div class="internal-tab" data-tab="internal-tab2">下载资源</div>
+        </div>
+        <div class="internal-tab-content active" id="internal-tab1">
+            <div class="search-bar">
+                <input type="text" class="search-input" id="searchInput1" placeholder="搜索学习资源...">
+                <button class="search-button" onclick="searchTable('searchInput1')">搜索</button>
+            </div>
+            <h3>学习资源</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>地址</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GD Script编程 —— B站 码客二十二</td>
+                        <td><a href="https://www.bilibili.com/video/BV1FuCrYcEW9/?spm_id_from=333.788.videopod.sections&vd_source=000511d1d64ebec9639a5c95b92a3b52">链接001</a></td>
+                    </tr>
+                    <tr>
+                        <td>QML教程 —— B站 落雨薄青衫</td>
+                        <td><a href="https://www.bilibili.com/video/BV1dS4y1u7vN/?spm_id_from=333.337.search-card.all.click&vd_source=0cbf97fa1eb76377ef75f371013779db">链接002</a></td>
+                    </tr>
+                    <tr>
+                        <td>Godot资源库（网站）</td>
+                        <td><a href="https://merxon22.github.io/GodotArchive/zh/posts/beginner_2d/">链接003</a></td>
+                    </tr>
+                    <tr>
+                        <td>civitai（魔法）</td>
+                        <td><a href="https://civitai.com/">链接004</a></td>
+                    </tr>
+                    <tr>
+                        <td>GitHub</td>
+                        <td><a href="https://github.com/">链接005</a></td>
+                    </tr>
+                    <tr>
+                        <td>csdn的markdown编辑器</td>
+                        <td><a href="https://editor.csdn.net/md/?articleId=">链接006</a></td>
+                    </tr>
+                    <tr>
+                        <td>图片格式转换工具</td>
+                        <td><a href="https://img.geshi.cn/convert">链接007</a></td>
+                    </tr>
+                    <tr>
+                        <td>C++题库收集网站</td>
+                        <td><a href="https://www.dotcpp.com/oj/train/">链接008</a></td>
+                    </tr>
+                    <tr>
+                        <td>chatGPT学习</td>
+                        <td><a href="https://chat.tinycms.xyz:3002/#/chat">链接009</a></td>
+                    </tr>
+                    <tr>
+                        <td>CSS教程</td>
+                        <td><a href="https://www.runoob.com/css/css-tutorial.html">链接010</a></td>
+                    </tr>
+                    <tr>
+                        <td>HMTL5教程</td>
+                        <td><a href="https://www.runoob.com/html/html-tutorial.html">链接011</a></td>
+                    </tr>
+                    <tr>
+                        <td>QT qml使用教程</td>
+                        <td><a href="https://runebook.dev/cn/docs/qt/qmlfirststeps">链接012</a></td>
+                    </tr>
+                    <tr>
+                        <td>阿里巴巴图标库</td>
+                        <td><a href="https://www.iconfont.cn/">链接013</a></td>
+                    </tr>
+                    <tr>
+                        <td>luatos</td>
+                        <td><a href="https://wiki.luatos.com/index.html">链接014</a></td>
+                    </tr>
+                    <tr>
+                        <td>Lua菜鸟教程</td>
+                        <td><a href="https://www.runoob.com/lua/lua-environment.html">链接015</a></td>
+                    </tr>
+                    <tr>
+                        <td>在线生成ASCII艺术字</td>
+                        <td><a href="https://www.lddgo.net/string/text-to-ascii-art">链接016</a></td>
+                    </tr>
+                    <tr>
+                        <td>CSDN —— Python题目</td>
+                        <td><a href="https://blog.csdn.net/weixin_40547993/article/details/88928075">链接017</a></td>
+                    </tr>
+                    <tr>
+                        <td>Gradio系列教程 —— B站 旧区君</td>
+                        <td><a href="https://www.bilibili.com/video/BV19m411U7K8/?spm_id_from=333.1391.0.0&vd_source=000511d1d64ebec9639a5c95b92a3b52">链接018</a></td>
+                    </tr>
+                    <tr>
+                        <td>Python Qt 图形界面-2024版 —— B站 白月黑羽编程</td>
+                        <td><a href="https://www.bilibili.com/video/BV1cJ411R7bP?spm_id_from=333.788.videopod.episodes&vd_source=000511d1d64ebec9639a5c95b92a3b52">链接020</a></td>
+                    </tr>
+                    <tr>
+                        <td>python+人工智能 —— B站 求知讲堂</td>
+                        <td><a href="https://www.bilibili.com/video/BV1vA411b7Rn?spm_id_from=333.788.videopod.episodes&vd_source=000511d1d64ebec9639a5c95b92a3b52">链接020</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="internal-tab-content" id="internal-tab2">
+            <div class="search-bar">
+                <input type="text" class="search-input" id="searchInput2" placeholder="搜索下载资源...">
+                <button class="search-button" onclick="searchTable('searchInput2')">搜索</button>
+            </div>
+            <h3>下载资源</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>资源名称</th>
+                        <th>下载方式</th>
+                        <th>下载链接</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>[AI模型] WAI-NSFW-illustrious-SDXL</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/31176/waiNsfwIllustrious11.Nmu2.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22waiNSFWIllustrious_v110.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123046Z&X-Amz-SignedHeaders=host&X-Amz-Signature=e4ee59cf5fe9fe083b2cb247f11569bdcc008e5d58d90081bb451477ca0f2266">下载链接1</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] CyberRealistic Pony</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/6357/cyberrealisticponyV80.6IKj.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22cyberrealisticPony_v8.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123147Z&X-Amz-SignedHeaders=host&X-Amz-Signature=810ff60db02bf292dd83a17d029062ca7e3cea8c242f33ccdf28bd902af64e13">下载链接2</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] WAI-REAL_CN</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/31176/waiREALCN14.BrvN.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22waiREALCN_v14.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T125037Z&X-Amz-SignedHeaders=host&X-Amz-Signature=b5438d743ed3206e66937a4f5e2367a6f616e2d096d5f0d19ea71ca0df57acde">下载链接3</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] Hassaku XL (Illustrious)</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/39650/hassakuillustriousv2.GqoI.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22hassakuXLIllustrious_v2.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123324Z&X-Amz-SignedHeaders=host&X-Amz-Signature=b7ce546101d05ab5a992dac788a5f214fae7c837dbadeeb7dfd5b0ef1e6896e7">下载链接4</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] Real Dream</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/58980/pony15RealDream.wkvM.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22realDream_sdxlPony15.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123414Z&X-Amz-SignedHeaders=host&X-Amz-Signature=040eb914b586f0082139fde2f6c724c6cfbccdcae313956c8cb69f8a9b126adb">下载链接5</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] Animagine XL 4.0</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/3335630/animagineXl40Opt.Mt5n.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22animagineXL40_v4Opt.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123456Z&X-Amz-SignedHeaders=host&X-Amz-Signature=2a26ab1cb22507cd1e0bbc983c559cc26c70aef5bcce31ab93fb23c7d76a0b14">下载链接6</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] Hunyuan Video (Safetensors) - Comfy Native/Kijai</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/1932198/hunyanvideoFP8E4M3.QTbp.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22hunyuanVideoSafetensors_comfyDiffusionFP8.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123547Z&X-Amz-SignedHeaders=host&X-Amz-Signature=19510a6b76fce37b1e62efb8d5b982d625bbbc53d5691eef4dcec983e10992e8">下载链接7</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] AutismMix SDXL</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/3048970/autismmixPASB1Pony.hODl.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22autismmixSDXL_autismmixPony.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123631Z&X-Amz-SignedHeaders=host&X-Amz-Signature=9aed1e04803e96a7723df76991e32ac2945ac91d02a0b346219d9a2110fb13f1">下载链接8</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] Not Artists Styles for Pony Diffusion V6 XL</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/1461/sketch20illustration20style.OqdP.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22Sketch%20Illustration%20Style%20%5BLoRA%5D%20-%20Pony%20V6%20XL.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123658Z&X-Amz-SignedHeaders=host&X-Amz-Signature=dc3130a15c9380c89140ebe0993abf93ef57260e80c010bf34867fabfc24426f">下载链接9</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] Pony Realism</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/3876538/ponyrealismV22VAE.gWd2.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22ponyRealism_V22MainVAE.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123746Z&X-Amz-SignedHeaders=host&X-Amz-Signature=b455ca0e87c8a575462efe94002c5002c9711959b190e1a93c50cb02a295700b">下载链接10</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] Prefect Pony XL</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/14538/prefectPonyV5Fp16.sCyT.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22prefectPonyXL_v50.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123821Z&X-Amz-SignedHeaders=host&X-Amz-Signature=2855d52e7dc317f7f3982295951d3959b663181ac6b3ad8fd329eecb3dc16367">下载链接11</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] Juggernaut XL</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/764940/juggernautXI.UXFd.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22juggernautXL_juggXIByRundiffusion.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123902Z&X-Amz-SignedHeaders=host&X-Amz-Signature=c6f0264260810e22bc95ffe89fedfb922bed9ce668bc80e1a53c3b0c4a77a8a1">下载链接12</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] WAI-ANI-NSFW-PONYXL</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/31176/waiANIHENTAIPONYXL13.qfgJ.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22waiANINSFWPONYXL_v130.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T123934Z&X-Amz-SignedHeaders=host&X-Amz-Signature=372ef22afc582f2b6e61532ef5d99dabebae70decbe1728519cb374f4eb94117">下载链接13</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] Realistic Vision V6.0 B1</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/26957/realisticVisionV51.qPOH.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22realisticVisionV60B1_v51HyperVAE.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T124029Z&X-Amz-SignedHeaders=host&X-Amz-Signature=ccae321e87110f01584203145365495a9fe816cf6493164b91b564a856a29bb3">下载链接14</a></td>
+                    </tr>
+                    <tr>
+                        <td>[AI模型] NoobAI-XL (NAI-XL)</td>
+                        <td>C官网下载</td>
+                        <td><a href="https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/103485/noobaiXlVpredV10.0zE1.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22noobaiXLNAIXL_vPred10Version.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20250228/us-east-1/s3/aws4_request&X-Amz-Date=20250228T124117Z&X-Amz-SignedHeaders=host&X-Amz-Signature=2488774a0fce0d1a9c86a19d93c9bf5bada328f6944f979be1b564bc9220f549">下载链接2</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.internal-tab').forEach(internalTab => {
+            internalTab.addEventListener('click', () => {
+                document.querySelectorAll('.internal-tab').forEach(t => t.classList.remove('active'));
+                internalTab.classList.add('active');
+
+                document.querySelectorAll('.internal-tab-content').forEach(content => content.classList.remove('active'));
+                document.getElementById(internalTab.dataset.tab).classList.add('active');
+            });
+        });
+
+        function searchTable(inputId) {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById(inputId);
+            filter = input.value.toUpperCase();
+            // 获取输入框所在选项卡内容中的表格
+            var tabContent = input.closest('.internal-tab-content');
+            table = tabContent.querySelector('table');
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                tr[i].style.display = "none"; // 隐藏所有行
+                td = tr[i].getElementsByTagName("td")[0]; // 搜索名称列（第一列）
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = ""; // 显示匹配的行
+                    }
+                }
+            }
+        }
+
+        document.getElementById("searchButton").onclick = function(){
+            searchTable("searchInput1");
+        }
+
+        document.getElementById("searchButton2").onclick = function(){
+            searchTable("searchInput2");
+        }
+    </script>
+</body>
+</html>

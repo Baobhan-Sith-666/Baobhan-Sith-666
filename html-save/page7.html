@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown实时编辑器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            display: flex;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        :root {
+            --background-color: #f5f5f5;
+            --text-color: #000000;
+            --toolbar-background: #ffffff;
+            --border-color: #ccc;
+            --input-background: #ffffff;
+            --input-text-color: #000000;
+            --code-block-background: #f5f5f5;
+            --blockquote-background: #f9f9f9;
+            --code-text-color: #000000; /* 亮色模式下代码和引用的字体颜色 */
+            --blockquote-text-color: #555555;
+        }
+
+        .dark-theme {
+            --background-color: #333333;
+            --text-color: #ffffff;
+            --toolbar-background: #222222;
+            --border-color: #555555;
+            --input-background: #333333;
+            --input-text-color: #ffffff;
+            --code-block-background: #7F7F7F;
+            --blockquote-background: #f5f5dc;
+            --code-text-color: #888888; /* 暗色模式下代码和引用的字体颜色 */
+            --blockquote-text-color: #888888;
+        }
+
+        .toolbar {
+            width: 100px;
+            background-color: var(--toolbar-background);
+            padding: 20px;
+            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toolbar button {
+            padding: 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--toolbar-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: background-color 0.2s, transform 0.1s;
+            color: var(--text-color);
+        }
+
+        .toolbar button:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-1px);
+        }
+
+        .toolbar button:active {
+            transform: translateY(0);
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        textarea, #preview {
+            width: 45%;
+            height: 70vh;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--input-background);
+            color: var(--input-text-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #preview {
+            overflow-y: auto;
+        }
+
+        blockquote {
+            background-color: var(--blockquote-background);
+            border-left: 4px solid var(--border-color);
+            padding: 10px 15px;
+            margin: 0;
+            color: var(--blockquote-text-color); /* 使用变量控制引用文本的颜色 */
+        }
+
+        pre {
+            background-color: var(--code-block-background);
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: var(--code-text-color); /* 使用变量控制代码块的字体颜色 */
+        }
+
+        code {
+            font-family: Consolas, monospace;
+            background-color: var(--code-block-background);
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: var(--code-text-color); /* 使用变量控制代码的字体颜色 */
+        }
+
+        /* 动画样式 */
+        .toggle-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .sun, .moon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            transition: opacity 0.5s;
+            background-size: cover;
+        }
+
+        .sun {
+            background-image: url('SaveImage/sun.png');
+            opacity: 1;
+        }
+
+        .moon {
+            background-image: url('SaveImage/moon.png');
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <button onclick="formatText('# ', '标题 1')">H1</button>
+        <button onclick="formatText('## ', '标题 2')">H2</button>
+        <button onclick="formatText('### ', '标题 3')">H3</button>
+        <button onclick="formatText('#### ', '标题 4')">H4</button>
+        <button onclick="formatText('##### ', '标题 5')">H5</button>
+        <button onclick="formatText('**', 'xxx**')">加粗</button>
+        <button onclick="formatText('*', 'xxx*')">斜体</button>
+        <button onclick="formatText('```', '\n```')">代码</button>
+        <button onclick="formatText('[链接文字](https://)', '')">链接</button>
+        <button onclick="formatText('![图片描述](https://)', '')">图片</button>
+        <button onclick="formatText('- ', '列表项')">无序列表</button>
+        <button onclick="formatText('1. ', '列表项')">有序列表</button>
+        <button onclick="formatText('> ', '引用文本')">引用</button>
+        <button onclick="formatText('```\n', '\n```')">代码块</button>
+        <button onclick="formatText('**', '**')">分割线</button>
+    </div>
+    <div class="container">
+        <textarea id="markdown-input" placeholder="在这里输入Markdown..."></textarea>
+        <div id="preview"></div>
+    </div>
+
+    <!-- 动画容器 -->
+    <div class="toggle-container">
+        <div class="sun"></div>
+        <div class="moon"></div>
+    </div>
+
+    <script>
+        const markdownInput = document.getElementById('markdown-input');
+        const preview = document.getElementById('preview');
+
+        markdownInput.addEventListener('input', function() {
+            const markdownText = markdownInput.value;
+            const htmlText = marked.parse(markdownText);
+            preview.innerHTML = htmlText;
+        });
+
+        function formatText(syntax, placeholder) {
+            const textarea = markdownInput;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            const beforeText = textarea.value.substring(0, start);
+            const afterText = textarea.value.substring(end);
+
+            let newText;
+            if (selectedText) {
+                newText = beforeText + syntax + selectedText + syntax + afterText;
+            } else {
+                newText = beforeText + syntax + placeholder + afterText;
+            }
+
+            textarea.value = newText;
+            const newCursorPos = start + syntax.length + (selectedText ? 0 : placeholder.length);
+            textarea.setSelectionRange(newCursorPos, newCursorPos);
+            const event = new Event('input', { bubbles: true });
+            textarea.dispatchEvent(event);
+            textarea.focus();
+        }
+
+        // 动画切换逻辑
+        const sun = document.querySelector('.sun');
+        const moon = document.querySelector('.moon');
+        const container = document.querySelector('.toggle-container');
+
+        container.addEventListener('click', () => {
+            if (sun.style.opacity === '0') {
+                // 当前是月亮模式，切换到太阳模式
+                sun.style.opacity = '1';
+                moon.style.opacity = '0';
+                document.documentElement.classList.remove('dark-theme');
+            } else {
+                // 当前是太阳模式，切换到月亮模式
+                sun.style.opacity = '0';
+                moon.style.opacity = '1';
+                document.documentElement.classList.add('dark-theme');
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+</body>
+</html>
